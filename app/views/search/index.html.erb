@@ -1,0 +1,19 @@
+<h1>Search for your local weather</h1>
+
+<%= form_with(url: search_path, method: "get", local: true) do %>
+    <%= label_tag(:location, "Enter Location name:") %>
+    <%= text_field_tag(:location) %>
+    <%= submit_tag("Search") %>
+<% end %>
+<br>
+
+<% if @data %>
+    <div>
+        <p>The weather in <b><%= params['location'].capitalize %></b> is </p> 
+        <% c_temp = integer(@temp) %>
+        <p>Temperature: <%= in_fahrenheit(c_temp) %> °F / <%= @temp %></p>
+        <% mph_wind = wind_integer(@wind) %>
+        <p>Wind: <%= in_mph(mph_wind) %> mph / <%= @wind %></p>
+        <p>Description: <%= @description %></p> 
+    </div>
+<% end %> 
